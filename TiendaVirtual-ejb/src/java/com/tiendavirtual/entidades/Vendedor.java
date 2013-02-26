@@ -5,10 +5,22 @@
 
 package com.tiendavirtual.entidades;
 
+import java.util.List;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 /**
  *
  * @author USUARIO
  */
-public class Vendedor {
+@Entity
+@DiscriminatorValue(value="V")
+public class Vendedor extends Persona {
 
+    @OneToMany(mappedBy="vendedor")
+    private List<Producto> productos;
+    private int calificacion;
+    
+    
 }
