@@ -24,5 +24,21 @@ public class TipoIdentificacion {
     @Column(nullable=false,length=30)
     private String descripcion;
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    
 }

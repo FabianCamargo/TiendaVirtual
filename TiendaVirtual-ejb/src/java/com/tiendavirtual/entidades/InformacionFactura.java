@@ -32,4 +32,38 @@ public class InformacionFactura {
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name="FECHA_EXPIRACION",nullable=false)
     private Calendar fechaExpiracion;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNumeroCuenta() {
+        return numeroCuenta;
+    }
+
+    public void setNumeroCuenta(String numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
+    }
+
+    public String getCodigoTarjeta() {
+        return codigoTarjeta;
+    }
+
+    public void setCodigoTarjeta(String codigoTarjeta) {
+        this.codigoTarjeta = codigoTarjeta;
+    }
+
+    public Calendar getFechaExpiracion() {
+        return fechaExpiracion;
+    }
+
+    public void setFechaExpiracion(Calendar fechaExpiracion) {
+        this.fechaExpiracion = fechaExpiracion;
+    }
+    
+    
 }

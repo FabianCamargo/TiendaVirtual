@@ -23,5 +23,23 @@ public class Comprador extends Persona{
     private List<Orden> ordenes;
     @Column(name="CANTIDAD_COMPRAS")
     private int cantidadCompras;
+
+    public List<Orden> getOrdenes() {
+        return ordenes;
+    }
+
+    public void setOrdenes(List<Orden> ordenes) {
+        this.ordenes = ordenes;
+    }
+
+    public int getCantidadCompras() {
+        return cantidadCompras;
+    }
+
+    public void setCantidadCompras(int cantidadCompras) {
+        this.cantidadCompras = cantidadCompras;
+    }
+    
+    
     
 }

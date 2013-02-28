@@ -21,6 +21,22 @@ public class Vendedor extends Persona {
     @OneToMany(mappedBy="vendedor")
     private List<Producto> productos;
     private int calificacion;
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+    }
     
-    
+        
 }

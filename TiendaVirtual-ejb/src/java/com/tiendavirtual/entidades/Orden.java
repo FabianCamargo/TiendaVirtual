@@ -45,6 +45,55 @@ public class Orden {
     @OneToOne(optional=false)
     @JoinColumn(name="ID_INF-ENVIO")
     private InformacionEnvio informacionEnvio;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Calendar getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Calendar fecha) {
+        this.fecha = fecha;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public Comprador getComprador() {
+        return comprador;
+    }
+
+    public void setComprador(Comprador comprador) {
+        this.comprador = comprador;
+    }
+
+    public InformacionFactura getInformacionFactura() {
+        return informacionFactura;
+    }
+
+    public void setInformacionFactura(InformacionFactura informacionFactura) {
+        this.informacionFactura = informacionFactura;
+    }
+
+    public InformacionEnvio getInformacionEnvio() {
+        return informacionEnvio;
+    }
+
+    public void setInformacionEnvio(InformacionEnvio informacionEnvio) {
+        this.informacionEnvio = informacionEnvio;
+    }
+    
     
 
 }
