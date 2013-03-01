@@ -22,5 +22,7 @@ public interface AdministracionOrdenLocal {
     void adicionarInformacionFactura(InformacionFactura informacionFactura);
     void adicionarInformacionEnvio(InformacionEnvio informacionEnvio);
     Integer crearOrdenCompra();
+    void cancelarOrdenCompra();
+    Comprador getComprador();
     
 }

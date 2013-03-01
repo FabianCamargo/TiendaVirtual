@@ -4,6 +4,8 @@
  */
 package com.tiendavirtual.logica;
 
+import com.tiendavirtual.entidades.Bitacora;
+import com.tiendavirtual.entidades.Comprador;
 import com.tiendavirtual.entidades.InformacionEnvio;
 import com.tiendavirtual.entidades.InformacionFactura;
 import com.tiendavirtual.entidades.Orden;
@@ -28,5 +30,12 @@ public interface AdministracionPersistenciaLocal {
     
     public void modificarProductos(List<Producto> productos, Integer idOrden);
     
+    public Comprador consultarComprador(int idComprador);
+    
+    public List<Producto> consultarProductos();
+    
+    public Integer crearBitacora(Bitacora bitacora);
+    
+    public List<Comprador> consultarCompradores();
     
 }

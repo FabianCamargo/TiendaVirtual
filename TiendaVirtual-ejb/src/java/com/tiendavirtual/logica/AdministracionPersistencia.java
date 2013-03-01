@@ -4,6 +4,8 @@
  */
 package com.tiendavirtual.logica;
 
+import com.tiendavirtual.entidades.Bitacora;
+import com.tiendavirtual.entidades.Comprador;
 import com.tiendavirtual.entidades.InformacionEnvio;
 import com.tiendavirtual.entidades.InformacionFactura;
 import com.tiendavirtual.entidades.Orden;
@@ -169,6 +171,26 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
         } catch (SQLException ex) {
             System.out.println("Error modificarProductos " + ex.toString());
         }
+    }
+
+    @Override
+    public Comprador consultarComprador(int idComprador) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Producto> consultarProductos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Integer crearBitacora(Bitacora bitacora) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Comprador> consultarCompradores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   

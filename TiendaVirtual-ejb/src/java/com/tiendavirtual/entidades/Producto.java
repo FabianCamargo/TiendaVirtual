@@ -9,12 +9,15 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 
 /**
@@ -22,6 +25,10 @@ import javax.persistence.Temporal;
  * @author USUARIO
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="findAllProducts", query="SELECT p FROM Producto p"),
+    @NamedQuery(name="findProductById", query="SELECT p FROM Producto p WHERE p.id =: idProducto")
+})
 public class Producto {
     
     @Id
@@ -39,7 +46,7 @@ public class Producto {
     @ManyToOne(optional=false)
     @JoinColumn(name="ID_VENDEDOR",nullable=false)
     private Vendedor vendedor;
-    @ManyToMany
+    @ManyToMany(fetch= FetchType.LAZY)
     private List<Categoria> categorias;
     
     @ManyToOne

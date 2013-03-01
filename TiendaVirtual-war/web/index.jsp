@@ -14,6 +14,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="http://localhost:8086/TiendaVirtual-war/ClienteEJB" method="post">
+            
+            <button value="prueba" type="submit">Enviar</button>
+            
+        </form>
     </body>
 </html>

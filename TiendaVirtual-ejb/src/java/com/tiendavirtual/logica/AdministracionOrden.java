@@ -77,10 +77,12 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     }
 
     @Remove
+    @Override
     public void cancelarOrdenCompra(){
         
     }
     
+    @Override
     public Comprador getComprador(){
         return this.comprador;
     }
