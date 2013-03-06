@@ -5,10 +5,12 @@
 
 package com.tiendavirtual.entidades;
 
+import com.tiendavirtual.auditoria.MonitoreoProducto;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +29,9 @@ import javax.persistence.Temporal;
 @Entity
 @NamedQueries({
     @NamedQuery(name="findAllProducts", query="SELECT p FROM Producto p"),
-    @NamedQuery(name="findProductById", query="SELECT p FROM Producto p WHERE p.id =: idProducto")
+    @NamedQuery(name="findProductById", query="SELECT p FROM Producto p WHERE p.id = :idProducto")
 })
+@EntityListeners(MonitoreoProducto.class)
 public class Producto {
     
     @Id
