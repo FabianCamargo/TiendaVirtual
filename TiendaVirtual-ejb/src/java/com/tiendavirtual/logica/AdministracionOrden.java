@@ -67,18 +67,21 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     @Interceptors(CreacionOrdenInterceptor.class)
     public Integer crearOrdenCompra() {
        
-        informacionEnvio.setId( administracionPersistencia.crearInformacionEnvio(informacionEnvio));
-        informacionFactura.setId( administracionPersistencia.crearInformacionFactura(informacionFactura));
-        
-        Orden orden = new Orden();
-        orden.setComprador(comprador);
-        orden.setFecha ( Calendar.getInstance() );
-        orden.setInformacionEnvio( informacionEnvio );
-        orden.setInformacionFactura(informacionFactura);
-        
-        Integer idOrden = administracionPersistencia.createOrden(orden);
-        administracionPersistencia.modificarProductos(productos, idOrden);
-        return idOrden;
+       administracionPersistencia.crearInformacionEnvio(informacionEnvio);
+       administracionPersistencia.crearInformacionFactura(informacionFactura);
+       
+       Orden orden = new Orden();
+       orden.setComprador(comprador);
+       orden.setFecha(Calendar.getInstance());
+       orden.setInformacionEnvio(informacionEnvio);
+       orden.setInformacionFactura(informacionFactura);
+       
+       administracionPersistencia.crearOrden(orden);
+       
+       administracionPersistencia.modificarProductos(productos,orden.getId());
+       
+       return orden.getId();
+       
     }
 
     @Remove

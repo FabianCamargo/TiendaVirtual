@@ -43,7 +43,7 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
-    public Integer createOrden(Orden orden) {
+    public Integer crearOrden(Orden orden) {
         
         em.persist(orden);
         timerService.createTimer(1500, orden);
@@ -105,12 +105,18 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
 
     @Override
     public Integer crearBitacora(Bitacora bitacora) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        em.persist(bitacora);
+        return bitacora.getId();
+        
     }
 
     @Override
     public List<Comprador> consultarCompradores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        Query query = em.createNamedQuery("findAllComprador");
+        return query.getResultList();
+        
     }
     
     

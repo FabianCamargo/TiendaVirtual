@@ -22,7 +22,7 @@ public interface AdministracionPersistenciaLocal {
     
     public Producto consultarProducto(int idProducto);
     
-    public Integer createOrden(Orden orden);
+    public Integer crearOrden(Orden orden);
     
     public Integer crearInformacionEnvio(InformacionEnvio informacionEnvio);
     
