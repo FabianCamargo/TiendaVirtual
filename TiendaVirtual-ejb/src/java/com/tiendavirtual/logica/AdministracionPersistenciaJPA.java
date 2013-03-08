@@ -11,10 +11,16 @@ import com.tiendavirtual.entidades.InformacionFactura;
 import com.tiendavirtual.entidades.Orden;
 import com.tiendavirtual.entidades.Producto;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerService;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import notificaciones.NotificacionInterceptor;
 
 /**
  *
@@ -25,6 +31,9 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     
     @PersistenceContext
     private EntityManager em;
+    
+    @Resource
+    TimerService timerService;
 
     @Override
     public Producto consultarProducto(int idProducto) {
@@ -36,10 +45,20 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
-    public Integer createOrden(Orden orden) {
+    @Interceptors(NotificacionInterceptor.class)
+    public Integer crearOrden(Orden orden) {
         
         em.persist(orden);
+        timerService.createTimer(1500, orden);
         return orden.getId();
+        
+    }
+    
+    @Timeout    
+    private void timerCrearOrden(Timer timer){
+        Orden orden = (Orden)timer.getInfo();
+        System.out.println("Se ha enviado la orden a la direccion "+
+                orden.getInformacionEnvio().getDireccion());
         
     }
 
@@ -89,12 +108,18 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
 
     @Override
     public Integer crearBitacora(Bitacora bitacora) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        em.persist(bitacora);
+        return bitacora.getId();
+        
     }
 
     @Override
     public List<Comprador> consultarCompradores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        Query query = em.createNamedQuery("findAllComprador");
+        return query.getResultList();
+        
     }
     
     

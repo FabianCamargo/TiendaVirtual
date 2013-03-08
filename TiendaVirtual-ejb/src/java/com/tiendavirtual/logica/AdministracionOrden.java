@@ -4,6 +4,7 @@
  */
 package com.tiendavirtual.logica;
 
+import com.tiendavirtual.auditoria.CreacionOrdenInterceptor;
 import com.tiendavirtual.entidades.Comprador;
 import com.tiendavirtual.entidades.InformacionEnvio;
 import com.tiendavirtual.entidades.InformacionFactura;
@@ -15,6 +16,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.interceptor.Interceptors;
 
 /**
  *
@@ -29,7 +31,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     private InformacionFactura informacionFactura;
     private InformacionEnvio informacionEnvio;
     
-    @EJB
+    @EJB()
     AdministracionPersistenciaLocal administracionPersistencia;
     
     public AdministracionOrden(){
@@ -59,21 +61,27 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
         this.informacionEnvio = informacionEnvio;
     }
 
+    
     @Override
+    @Remove
+    @Interceptors(CreacionOrdenInterceptor.class)
     public Integer crearOrdenCompra() {
        
-        informacionEnvio.setId( administracionPersistencia.crearInformacionEnvio(informacionEnvio));
-        informacionFactura.setId( administracionPersistencia.crearInformacionFactura(informacionFactura));
-        
-        Orden orden = new Orden();
-        orden.setComprador(comprador);
-        orden.setFecha ( Calendar.getInstance() );
-        orden.setInformacionEnvio( informacionEnvio );
-        orden.setInformacionFactura(informacionFactura);
-        
-        Integer idOrden = administracionPersistencia.createOrden(orden);
-        administracionPersistencia.modificarProductos(productos, idOrden);
-        return idOrden;
+       administracionPersistencia.crearInformacionEnvio(informacionEnvio);
+       administracionPersistencia.crearInformacionFactura(informacionFactura);
+       
+       Orden orden = new Orden();
+       orden.setComprador(comprador);
+       orden.setFecha(Calendar.getInstance());
+       orden.setInformacionEnvio(informacionEnvio);
+       orden.setInformacionFactura(informacionFactura);
+       
+       administracionPersistencia.crearOrden(orden);
+       
+       administracionPersistencia.modificarProductos(productos,orden.getId());
+       
+       return orden.getId();
+       
     }
 
     @Remove

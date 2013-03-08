@@ -5,6 +5,7 @@
 
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.persistence.Temporal;
  * @author USUARIO
  */
 @Entity
-public class Orden {
+public class Orden implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

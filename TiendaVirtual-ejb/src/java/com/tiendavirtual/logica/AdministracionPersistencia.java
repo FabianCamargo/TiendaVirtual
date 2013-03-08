@@ -26,11 +26,11 @@ import javax.sql.DataSource;
  * @author User
  */
 @Stateless
-public class AdministracionPersistencia implements AdministracionPersistenciaLocal {
+public class AdministracionPersistencia  {
 
     private Connection connection;
     
-    @Resource(name="jdbc/tiendaVirtualDB")
+    @Resource(name="jdbc/miTiendaVirtual")
     DataSource ds;
     
     @PostConstruct
@@ -62,7 +62,7 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
     
     
     
-    @Override
+    
     public Producto consultarProducto(int idProducto) {
         
         Producto producto = null;
@@ -83,7 +83,7 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
         
     }
 
-    @Override
+    
     public Integer createOrden(Orden orden) {
         Integer idOrden = null;
         try {
@@ -108,7 +108,7 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
         
     }
 
-    @Override
+    
     public Integer crearInformacionEnvio(InformacionEnvio informacionEnvio) {
         Integer idInformacionEnvio = null;
         try {
@@ -131,7 +131,7 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
         return idInformacionEnvio;
     }
 
-    @Override
+    
     public Integer crearInformacionFactura(InformacionFactura informacionFactura) {
         Integer idInformacionFactura = null;
         try {
@@ -155,7 +155,7 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
         return idInformacionFactura;
     }
 
-    @Override
+    
     public void modificarProductos(List<Producto> productos, Integer idOrden) {
         try {
             //asigna número de orden a los productos comprados
@@ -173,22 +173,22 @@ public class AdministracionPersistencia implements AdministracionPersistenciaLoc
         }
     }
 
-    @Override
+    
     public Comprador consultarComprador(int idComprador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public List<Producto> consultarProductos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public Integer crearBitacora(Bitacora bitacora) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
+    
     public List<Comprador> consultarCompradores() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
