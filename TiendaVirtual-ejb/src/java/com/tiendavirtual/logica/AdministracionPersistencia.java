@@ -30,7 +30,7 @@ public class AdministracionPersistencia  {
 
     private Connection connection;
     
-    @Resource(name="jdbc/miTiendaVirtual")
+    @Resource(name="jdbc/tiendaVirtualDB")
     DataSource ds;
     
     @PostConstruct

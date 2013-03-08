@@ -75,6 +75,7 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
        orden.setFecha(Calendar.getInstance());
        orden.setInformacionEnvio(informacionEnvio);
        orden.setInformacionFactura(informacionFactura);
+       orden.setProductos(productos);
        
        administracionPersistencia.crearOrden(orden);
        

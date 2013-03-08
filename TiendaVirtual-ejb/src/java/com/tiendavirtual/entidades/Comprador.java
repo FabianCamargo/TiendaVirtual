@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
 @Entity
 @DiscriminatorValue(value="C")
 @NamedQueries(
-        @NamedQuery(name="findAllComprador",query = "SELECT c FROM Compradores c")
+        @NamedQuery(name="findAllComprador",query = "SELECT c FROM Comprador c")
         )
 public class Comprador extends Persona{
 
