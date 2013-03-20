@@ -5,6 +5,7 @@
 
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ import javax.persistence.ManyToMany;
  * @author USUARIO
  */
 @Entity
-public class Categoria {
+public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

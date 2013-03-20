@@ -5,6 +5,7 @@
 
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -22,7 +23,7 @@ import javax.persistence.OneToMany;
 @NamedQueries(
         @NamedQuery(name="findAllComprador",query = "SELECT c FROM Comprador c")
         )
-public class Comprador extends Persona{
+public class Comprador extends Persona implements Serializable{
 
     @OneToMany(mappedBy="comprador")
     private List<Orden> ordenes;

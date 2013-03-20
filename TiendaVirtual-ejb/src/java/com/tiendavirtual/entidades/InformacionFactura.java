@@ -5,6 +5,7 @@
 
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name="INFORMACION_FACTURA")
-public class InformacionFactura {
+public class InformacionFactura implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

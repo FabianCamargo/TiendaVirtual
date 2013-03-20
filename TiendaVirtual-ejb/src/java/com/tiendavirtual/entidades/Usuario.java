@@ -4,6 +4,7 @@
  */
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +14,7 @@ import javax.persistence.Id;
  * @author User
  */
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
     
     @Id
     @Column(name="ID_USUARIO")

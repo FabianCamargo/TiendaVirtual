@@ -5,6 +5,7 @@
 
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="INFORMACION_ENVIO")
-public class InformacionEnvio {
+public class InformacionEnvio implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

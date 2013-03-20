@@ -4,6 +4,7 @@
  */
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,7 +15,7 @@ import javax.persistence.ManyToOne;
  * @author User
  */
 @Entity(name="GRUPO_USUARIO")
-public class GrupoUsuario {
+public class GrupoUsuario implements Serializable {
     
     @EmbeddedId
     private GrupoUsuarioPK id;

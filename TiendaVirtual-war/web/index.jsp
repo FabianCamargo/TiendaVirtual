@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="http://localhost:8086/TiendaVirtual-war/ClienteEJB" method="post">
+        <form action="./ClienteEJB" method="post">
             
             <button value="prueba" type="submit">Enviar</button>
             

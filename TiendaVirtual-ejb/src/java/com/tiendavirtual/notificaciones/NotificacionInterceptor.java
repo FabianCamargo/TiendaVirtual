@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package notificaciones;
+package com.tiendavirtual.notificaciones;
 
 import com.tiendavirtual.entidades.Orden;
 import javax.annotation.Resource;

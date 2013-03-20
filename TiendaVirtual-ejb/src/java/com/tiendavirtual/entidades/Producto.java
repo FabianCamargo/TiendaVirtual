@@ -6,6 +6,7 @@
 package com.tiendavirtual.entidades;
 
 import com.tiendavirtual.auditoria.MonitoreoProducto;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ import javax.persistence.Temporal;
     @NamedQuery(name="findProductById", query="SELECT p FROM Producto p WHERE p.id = :idProducto")
 })
 @EntityListeners(MonitoreoProducto.class)
-public class Producto {
+public class Producto implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

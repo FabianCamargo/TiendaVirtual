@@ -5,6 +5,7 @@
 
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="TIPO_IDENTIFICACION")
-public class TipoIdentificacion {
+public class TipoIdentificacion implements Serializable {
 
     @Id
     @Column(length=2)

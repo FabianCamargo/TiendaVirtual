@@ -5,6 +5,7 @@
 
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -26,7 +27,7 @@ import javax.persistence.Temporal;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="TIPO_PERSONA",discriminatorType=DiscriminatorType.STRING,length=1)
-public class Persona {
+public class Persona implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private int id;

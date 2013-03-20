@@ -4,6 +4,7 @@
  */
 package com.tiendavirtual.entidades;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -13,7 +14,7 @@ import javax.persistence.Embeddable;
  * @author User
  */
 @Embeddable
-public class GrupoUsuarioPK {
+public class GrupoUsuarioPK implements Serializable {
     @Basic(optional=false)
     @Column(name="ID_USUARIO")
     private String idUsuario;
