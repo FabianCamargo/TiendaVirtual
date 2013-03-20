@@ -10,12 +10,18 @@ import com.tiendavirtual.entidades.InformacionEnvio;
 import com.tiendavirtual.entidades.InformacionFactura;
 import com.tiendavirtual.entidades.Orden;
 import com.tiendavirtual.entidades.Producto;
+import com.tiendavirtual.excepciones.CreacionOrdenException;
+import com.tiendavirtual.excepciones.ModificacionProductoException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.interceptor.Interceptors;
 
 /**
@@ -23,9 +29,11 @@ import javax.interceptor.Interceptors;
  * @author User
  */
 @Stateful
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class AdministracionOrden implements AdministracionOrdenLocal {
 
-    
+     
     private List<Producto> productos;
     private Comprador comprador;
     private InformacionFactura informacionFactura;
@@ -65,25 +73,31 @@ public class AdministracionOrden implements AdministracionOrdenLocal {
     @Override
     @Remove
     @Interceptors(CreacionOrdenInterceptor.class)
-    public Integer crearOrdenCompra() {
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    public Integer crearOrdenCompra() throws CreacionOrdenException,ModificacionProductoException{
+        
+  
        
-       administracionPersistencia.crearInformacionEnvio(informacionEnvio);
-       administracionPersistencia.crearInformacionFactura(informacionFactura);
+            administracionPersistencia.crearInformacionEnvio(informacionEnvio);
+            administracionPersistencia.crearInformacionFactura(informacionFactura);
+
+            Orden orden = new Orden();
+            orden.setComprador(comprador);
+            orden.setFecha(Calendar.getInstance());
+            orden.setInformacionEnvio(informacionEnvio);
+            orden.setInformacionFactura(informacionFactura);
+            orden.setProductos(productos);
+
+            administracionPersistencia.crearOrden(orden);
+
+            administracionPersistencia.modificarProductos(productos,orden.getId());
+            
        
-       Orden orden = new Orden();
-       orden.setComprador(comprador);
-       orden.setFecha(Calendar.getInstance());
-       orden.setInformacionEnvio(informacionEnvio);
-       orden.setInformacionFactura(informacionFactura);
-       orden.setProductos(productos);
-       
-       administracionPersistencia.crearOrden(orden);
-       
-       administracionPersistencia.modificarProductos(productos,orden.getId());
        
        return orden.getId();
        
-    }
+    }//end of method crearOrdenCompra
+    
 
     @Remove
     @Override

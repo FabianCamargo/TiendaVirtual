@@ -8,6 +8,8 @@ import com.tiendavirtual.entidades.Comprador;
 import com.tiendavirtual.entidades.InformacionEnvio;
 import com.tiendavirtual.entidades.InformacionFactura;
 import com.tiendavirtual.entidades.Producto;
+import com.tiendavirtual.excepciones.CreacionOrdenException;
+import com.tiendavirtual.excepciones.ModificacionProductoException;
 import javax.ejb.Local;
 
 /**
@@ -21,7 +23,7 @@ public interface AdministracionOrdenLocal {
     void adicionarComprador(Comprador comprador);
     void adicionarInformacionFactura(InformacionFactura informacionFactura);
     void adicionarInformacionEnvio(InformacionEnvio informacionEnvio);
-    Integer crearOrdenCompra();
+    Integer crearOrdenCompra() throws CreacionOrdenException,ModificacionProductoException;
     void cancelarOrdenCompra();
     Comprador getComprador();
     

@@ -10,6 +10,8 @@ import com.tiendavirtual.entidades.InformacionEnvio;
 import com.tiendavirtual.entidades.InformacionFactura;
 import com.tiendavirtual.entidades.Orden;
 import com.tiendavirtual.entidades.Producto;
+import com.tiendavirtual.excepciones.CreacionOrdenException;
+import com.tiendavirtual.excepciones.ModificacionProductoException;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -21,12 +23,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import com.tiendavirtual.notificaciones.NotificacionInterceptor;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 /**
  *
  * @author Administrador
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class AdministracionPersistenciaJPA implements AdministracionPersistenciaLocal{
     
     @PersistenceContext
@@ -46,10 +54,17 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
 
     @Override
     @Interceptors(NotificacionInterceptor.class)
-    public Integer crearOrden(Orden orden) {
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Integer crearOrden(Orden orden) throws CreacionOrdenException {
         
-        em.persist(orden);
-        timerService.createTimer(1500, orden);
+        try{
+            
+            em.persist(orden);
+            timerService.createTimer(1500, orden);
+            
+        } catch(Exception ex){
+            throw new CreacionOrdenException();
+        }
         return orden.getId();
         
     }
@@ -63,6 +78,7 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearInformacionEnvio(InformacionEnvio informacionEnvio) {
             
             em.persist(informacionEnvio);
@@ -71,6 +87,7 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearInformacionFactura(InformacionFactura informacionFactura) {
         
         em.persist(informacionFactura);
@@ -79,19 +96,30 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
-    public void modificarProductos(List<Producto> productos, Integer idOrden) {
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void modificarProductos(List<Producto> productos, Integer idOrden) throws ModificacionProductoException {
        
-        Orden orden = em.find(Orden.class,idOrden);
-        for(Producto producto:productos){
-            producto.setOrden(orden);
-            em.merge(producto);
+        
+        try{
+                Orden orden = em.find(Orden.class,idOrden);
+                for(Producto producto:productos){
+                    producto.setOrden(orden);
+                    em.merge(producto);
+
+                }
+                
+                int a = 1/0;
+                
+        } catch(Exception ex){
             
+            throw new ModificacionProductoException();
         }
         
         
-    }
+    }//end of method
 
     @Override
+    
     public Comprador consultarComprador(int idComprador) {
         
         Comprador comprador;
@@ -107,6 +135,7 @@ public class AdministracionPersistenciaJPA implements AdministracionPersistencia
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Integer crearBitacora(Bitacora bitacora) {
         
         em.persist(bitacora);

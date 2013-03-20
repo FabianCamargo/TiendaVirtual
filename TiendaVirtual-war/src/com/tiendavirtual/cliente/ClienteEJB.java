@@ -9,11 +9,15 @@ import com.tiendavirtual.entidades.Comprador;
 import com.tiendavirtual.entidades.InformacionEnvio;
 import com.tiendavirtual.entidades.InformacionFactura;
 import com.tiendavirtual.entidades.Producto;
+import com.tiendavirtual.excepciones.CreacionOrdenException;
+import com.tiendavirtual.excepciones.ModificacionProductoException;
 import com.tiendavirtual.logica.AdministracionOrdenLocal;
 import com.tiendavirtual.logica.AdministracionPersistenciaLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -77,8 +81,15 @@ public class ClienteEJB extends HttpServlet {
             informacionFactura.setFechaExpiracion(Calendar.getInstance());
             informacionFactura.setNumeroCuenta("123456789");
             administracionOrden.adicionarInformacionFactura(informacionFactura);
-
-            administracionOrden.crearOrdenCompra();
+            try {
+                administracionOrden.crearOrdenCompra();
+            } catch (CreacionOrdenException ex) {
+                Logger.getLogger(ClienteEJB.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Ocurrio un error al crear la orden de compra");
+            } catch (ModificacionProductoException ex) {
+                Logger.getLogger(ClienteEJB.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Ocurrio un error al modificar los productos de la orden de compra");
+            }
 
         } finally { 
             out.close();
